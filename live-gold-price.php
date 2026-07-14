@@ -2,7 +2,11 @@
 /**
  * Plugin Name: Persian Live Gold Price for WooCommerce
  * Description: افزونه فارسی اتصال آنلاین به وب‌سرویس‌های قیمت لحظه‌ای طلا و محاسبه قیمت لحظه‌ای محصول
+<<<<<<< HEAD
  * Version: 0.4.8
+=======
+ * Version: 0.4.2
+>>>>>>> e4366c04c49faf916867199abfe6ae6fa8f71355
  * Author: Kourosh Marandi
  * Text Domain: live-gold-price
  */
