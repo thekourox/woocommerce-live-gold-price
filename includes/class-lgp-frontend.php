@@ -110,6 +110,31 @@ class LGP_Frontend {
 			</script>
 			<?php
 		}
+		
+		if ( get_option( 'lgp_dropdown_dark_mode_fix', 'no' ) === 'yes' ) {
+			?>
+			<style type="text/css">
+				/* Fix WooCommerce variation dropdowns in dark mode */
+				.woocommerce .variations select, 
+				.woocommerce .variations select option {
+					background-color: #222222 !important;
+					color: #ffffff !important;
+				}
+				/* Select2 support if the theme uses it for dropdowns */
+				.select2-container--default .select2-results__option {
+					background-color: #222222 !important;
+					color: #ffffff !important;
+				}
+				.select2-container--default .select2-selection--single {
+					background-color: #222222 !important;
+					border-color: #444 !important;
+				}
+				.select2-container--default .select2-selection--single .select2-selection__rendered {
+					color: #ffffff !important;
+				}
+			</style>
+			<?php
+		}
 	}
 
 	public static function override_price_html( $price_html, $product ) {

@@ -43,6 +43,7 @@ class LGP_Admin_Settings {
 		register_setting( 'lgp_settings_group', 'lgp_global_profit' );
 		register_setting( 'lgp_settings_group', 'lgp_global_tax' );
 		register_setting( 'lgp_settings_group', 'lgp_dark_mode_fix' );
+		register_setting( 'lgp_settings_group', 'lgp_dropdown_dark_mode_fix' );
 
 		add_settings_section(
 			'lgp_main_section',
@@ -90,6 +91,14 @@ class LGP_Admin_Settings {
 			'lgp-settings',
 			'lgp_main_section'
 		);
+
+		add_settings_field(
+			'lgp_dropdown_dark_mode_fix',
+			'اصلاح رنگ گزینه‌ها (لیست متغیرها)',
+			array( __CLASS__, 'render_dropdown_dark_mode_fix_field' ),
+			'lgp-settings',
+			'lgp_main_section'
+		);
 	}
 
 	public static function render_api_url_field() {
@@ -120,6 +129,12 @@ class LGP_Admin_Settings {
 		$value = get_option( 'lgp_dark_mode_fix', 'no' );
 		echo '<label><input type="checkbox" name="lgp_dark_mode_fix" value="yes" ' . checked( $value, 'yes', false ) . '> تبدیل خودکار متن‌ها و عناوین با رنگ تیره (#222222) به رنگ سفید (#fff)</label>';
 		echo '<p class="description">اگر از قالب تیره استفاده می‌کنید و برخی متون سایت به دلیل رنگ تیره ناخوانا هستند، این گزینه را فعال کنید.</p>';
+	}
+
+	public static function render_dropdown_dark_mode_fix_field() {
+		$value = get_option( 'lgp_dropdown_dark_mode_fix', 'no' );
+		echo '<label><input type="checkbox" name="lgp_dropdown_dark_mode_fix" value="yes" ' . checked( $value, 'yes', false ) . '> اصلاح رنگ لیست‌های بازشونده (Select/Dropdown) در قالب تیره</label>';
+		echo '<p class="description">در صورتی که در صفحه محصول، متن گزینه‌های منوی بازشونده (مثل اندازه انگشتر) قابل خواندن نیستند، این گزینه را فعال کنید تا پس‌زمینه تیره و متن سفید شود.</p>';
 	}
 
 	public static function settings_page_html() {
