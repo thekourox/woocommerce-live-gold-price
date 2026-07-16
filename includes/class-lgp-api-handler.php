@@ -13,7 +13,13 @@ class LGP_API_Handler {
 		$prices = get_transient( 'lgp_gold_prices' );
 
 		if ( false === $prices ) {
-			$prices = self::fetch_prices_from_api();
+			// Transient expired. Return backup immediately to prevent frontend blocking.
+			$prices = get_option( 'lgp_gold_prices_backup' );
+			
+			if ( ! $prices ) {
+				// Only if we have NO backup (first run ever), fetch synchronously.
+				$prices = self::fetch_prices_from_api();
+			}
 		}
 
 		return $prices;
@@ -29,6 +35,7 @@ class LGP_API_Handler {
 		
 		$response = wp_remote_get( $url, array(
 			'timeout' => 15,
+			'limit'   => 50000, // CRITICAL: Prevent Memory Leak (OOM) if API returns massive garbage payload
 		) );
 
 		if ( is_wp_error( $response ) ) {
